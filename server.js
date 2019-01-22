@@ -7,9 +7,9 @@ const bodyParser = require('body-parser'); // when a request has data, it taskes
 
 const port = process.env.PORT || 8080 //env is the environment variable, in this case it's the computer, or it would be the server 
 
-mongoose.connect('mongodb://localhost/updog');
-// const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/updog';
-// mongoose.connect(dbURL);
+// mongoose.connect('mongodb://localhost/updog');
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/updog'
+mongoose.connect(dbURL);
 
 app.use(express.static('public'));
 
@@ -61,7 +61,7 @@ router.route('/pets')
           .json(doc);
       })
    })
-  
+
 router.route('/pets/:pet_id')
    .get((req,res) => {
     const petId = req.params.pet_id;
@@ -127,6 +127,8 @@ router.route('/pets/:pet_id')
   
        });
 
+})
 app.use('/api', router);
 
 app.listen(port); 
+
