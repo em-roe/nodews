@@ -7,9 +7,9 @@ const bodyParser = require('body-parser'); // when a request has data, it taskes
 
 const port = process.env.PORT || 8080 //env is the environment variable, in this case it's the computer, or it would be the server 
 
-// mongoose.connect('mongodb://localhost/updog');
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/updog';
-mongoose.connect(dbURL);
+mongoose.connect('mongodb://localhost/updog');
+// const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/updog';
+// mongoose.connect(dbURL);
 
 app.use(express.static('public'));
 
@@ -17,8 +17,6 @@ app.use(bodyParser.json());
 
 router.route('/')
   .get((req, res) => {
-    res.json({message: 'success'})
-  });
 
 
 
@@ -63,7 +61,7 @@ router.route('/pets')
           .json(doc);
       })
    })
-
+  
 router.route('/pets/:pet_id')
    .get((req,res) => {
     const petId = req.params.pet_id;
@@ -131,4 +129,4 @@ router.route('/pets/:pet_id')
 
 app.use('/api', router);
 
-app.listen(port); // specific applications reserve specific ports, so you can't connect/use those ones. generally 3000 to 8000 is good for testing and development setting it as a variable will help us with future-proofing the app, and will be helpful when we Deploy. 
+app.listen(port); 
