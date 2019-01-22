@@ -15,10 +15,11 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
-router.route('/')
-  .get((req, res) => {
-
-
+router.route('/').get((req, res) => {
+  res.json({
+    message: 'Success'
+  });
+});
 
 
 router.route('/pets')
@@ -127,7 +128,7 @@ router.route('/pets/:pet_id')
   
        });
 
-})
+
 app.use('/api', router);
 
 app.listen(port); 
